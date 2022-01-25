@@ -63,7 +63,6 @@
       thisProduct.getElements();
       thisProduct.initAccordion();
       thisProduct.initOrderForm();
-
       console.log('new Product:', thisProduct);
     }
     renderInMenu(){
@@ -89,6 +88,7 @@
       thisProduct.formInputs = thisProduct.form.querySelectorAll(select.all.formInputs);
       thisProduct.cartButton = thisProduct.element.querySelector(select.menuProduct.cartButton);
       thisProduct.priceElem = thisProduct.element.querySelector(select.menuProduct.priceElem);
+      thisProduct.imageWrapper = thisProduct.element.querySelector(select.menuProduct.imageWrapper);
     }
     initAccordion(){
       const thisProduct = this;
@@ -106,11 +106,11 @@
         /* if there is active product and it's not thisProduct.element, remove class active from it */
         for (let activeProduct of activeProducts) {
           if (activeProduct != thisProduct.element) {
-            activeProduct.classList.remove('active');
+            activeProduct.classList.remove(classNames.menuProduct.wrapperActive);
           }
         }
         /* toggle active class on thisProduct.element */
-        thisProduct.element.classList.toggle('active');
+        thisProduct.element.classList.toggle(classNames.menuProduct.wrapperActive);
       });
     }
     initOrderForm(){
@@ -158,6 +158,23 @@
           
           //console.log(optionId);
           //console.log(option);
+
+          // ADD CLASS ACTIVE TO IMAGES
+
+          //find exact wrapper
+          const exactWrapper = thisProduct.imageWrapper.querySelector('.' + paramId + '-' +optionId)
+          console.log(exactWrapper);
+
+          //check if formData[paramId] includes optionId
+          if (formData[paramId].includes(optionId)){
+            exactWrapper.classList.add(classNames.menuProduct.imageVisible);
+            console.log('added');
+          }else{
+            exactWrapper.classList.remove(classNames.menuProduct.imageVisible);
+          }
+
+          //add class active to paramId-optionId
+
 
           // OBLICZANIE CENY
 
