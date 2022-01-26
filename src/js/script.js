@@ -58,6 +58,8 @@
 
       thisProduct.id = id;
       thisProduct.data = data;
+      
+      console.log(thisProduct.id);
 
       thisProduct.renderInMenu();
       thisProduct.getElements();
@@ -116,6 +118,7 @@
     initOrderForm(){
       console.log('initOrderForm');
       const thisProduct = this;
+      thisProduct.processOrder();
       thisProduct.form.addEventListener('submit', function(event){
         event.preventDefault();
         thisProduct.processOrder();
@@ -136,7 +139,7 @@
       console.log('processOrder');
       const thisProduct = this;
       const formData = utils.serializeFormToObject(thisProduct.form);
-      console.log(thisProduct.data);
+      //console.log(thisProduct.data);
       console.log('formData', formData);
     
     
@@ -162,17 +165,19 @@
           // ADD CLASS ACTIVE TO IMAGES
 
           //find exact wrapper
-          const exactWrapper = thisProduct.imageWrapper.querySelector('.' + paramId + '-' +optionId)
+          const exactWrapper = thisProduct.imageWrapper.querySelector('.' + paramId + '-' +optionId);
           console.log(exactWrapper);
 
-          //check if formData[paramId] includes optionId
-          if (formData[paramId].includes(optionId)){
-            exactWrapper.classList.add(classNames.menuProduct.imageVisible);
-            console.log('added');
-          }else{
-            exactWrapper.classList.remove(classNames.menuProduct.imageVisible);
-          }
+          if (exactWrapper !== null){
 
+            //check if formData[paramId] includes optionId
+            if (formData[paramId] && formData[paramId].includes(optionId)){
+              exactWrapper.classList.add(classNames.menuProduct.imageVisible);
+              console.log('added');
+            }else{
+              exactWrapper.classList.remove(classNames.menuProduct.imageVisible);
+            }
+          }
           //add class active to paramId-optionId
 
 
