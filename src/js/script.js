@@ -43,8 +43,8 @@
   const settings = {
     amountWidget: {
       defaultValue: 1,
-      defaultMin: 1,
-      defaultMax: 9,
+      defaultMin: 0,
+      defaultMax: 10,
     }
   };
 
@@ -55,17 +55,16 @@
   class Product{
     constructor(id, data){
       const thisProduct = this;
+      console.log('thisProduct: ', thisProduct);
 
       thisProduct.id = id;
       thisProduct.data = data;
       
-      console.log(thisProduct.id);
-
       thisProduct.renderInMenu();
       thisProduct.getElements();
       thisProduct.initAccordion();
+      thisProduct.initAmountWidget();
       thisProduct.initOrderForm();
-      console.log('new Product:', thisProduct);
     }
     renderInMenu(){
       const thisProduct = this;
@@ -91,6 +90,7 @@
       thisProduct.cartButton = thisProduct.element.querySelector(select.menuProduct.cartButton);
       thisProduct.priceElem = thisProduct.element.querySelector(select.menuProduct.priceElem);
       thisProduct.imageWrapper = thisProduct.element.querySelector(select.menuProduct.imageWrapper);
+      thisProduct.amountWidgetElem = thisProduct.element.querySelector(select.menuProduct.amountWidget);
     }
     initAccordion(){
       const thisProduct = this;
@@ -140,7 +140,7 @@
       const thisProduct = this;
       const formData = utils.serializeFormToObject(thisProduct.form);
       //console.log(thisProduct.data);
-      console.log('formData', formData);
+      //console.log('formData', formData);
     
     
       // set price to default price
@@ -166,14 +166,14 @@
 
           //find exact wrapper
           const exactWrapper = thisProduct.imageWrapper.querySelector('.' + paramId + '-' +optionId);
-          console.log(exactWrapper);
+          //console.log(exactWrapper);
 
           if (exactWrapper !== null){
 
             //check if formData[paramId] includes optionId
             if (formData[paramId] && formData[paramId].includes(optionId)){
               exactWrapper.classList.add(classNames.menuProduct.imageVisible);
-              console.log('added');
+              //console.log('added');
             }else{
               exactWrapper.classList.remove(classNames.menuProduct.imageVisible);
             }
@@ -202,11 +202,81 @@
           }  
         }
       }
+      // multiply price by amount
+      price *= thisProduct.amountWidget.value;
+
       // update calculated price in the HTML
       thisProduct.priceElem.innerHTML = price;
     }
+    initAmountWidget(){
+      const thisProduct = this;
+
+      thisProduct.amountWidget = new AmountWidget(thisProduct.amountWidgetElem);
+      
+      thisProduct.amountWidgetElem.addEventListener('updated', function(){
+        thisProduct.processOrder();
+      });
+
+
+    }
   }
   
+  class AmountWidget{
+    constructor(element){
+      const thisWidget = this;
+
+      thisWidget.getElements(element);
+      thisWidget.setValue(settings.amountWidget.defaultValue);
+      thisWidget.initActions();
+      
+      console.log('AmountWidget: ', thisWidget);
+      console.log('constructor arguments: ', element);
+    }
+    getElements(element){
+      const thisWidget = this;
+    
+      thisWidget.element = element;
+      thisWidget.input = thisWidget.element.querySelector(select.widgets.amount.input);
+      thisWidget.linkDecrease = thisWidget.element.querySelector(select.widgets.amount.linkDecrease);
+      thisWidget.linkIncrease = thisWidget.element.querySelector(select.widgets.amount.linkIncrease);
+
+    }
+    setValue(value){
+      console.log('setValue');
+      const thisWidget = this;
+    
+      const newValue = parseInt(value);
+
+      /* TODO: Add validation */
+      if (newValue !== thisWidget.value && newValue != null && newValue >= settings.amountWidget.defaultMin && newValue <= settings.amountWidget.defaultMax){
+        thisWidget.value = newValue;
+        thisWidget.announce();
+      }
+
+      thisWidget.input.value = thisWidget.value;
+    }
+    initActions(){
+      const thisWidget = this;
+
+      thisWidget.input.addEventListener('change', function(){
+        thisWidget.setValue(thisWidget.input.value);
+      });
+      thisWidget.linkDecrease.addEventListener('click', function(event){
+        event.preventDefault();
+        thisWidget.setValue(--thisWidget.input.value);
+      });
+      thisWidget.linkIncrease.addEventListener('click', function(event){
+        event.preventDefault();
+        thisWidget.setValue(++thisWidget.input.value);
+      });
+    }
+    announce(){
+      const thisWidget = this;
+
+      const event = new Event('updated');
+      thisWidget.element.dispatchEvent(event);
+    }
+  }
 
   const app = {
     initMenu: function(){
