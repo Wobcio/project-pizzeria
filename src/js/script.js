@@ -430,7 +430,7 @@
       thisCart.dom.form.addEventListener('submit', function(event){
         event.preventDefault();
         thisCart.sendOrder();
-      })
+      });
     }
     add(menuProduct){
       const thisCart = this;
@@ -508,7 +508,7 @@
     sendOrder(){
       const thisCart = this;
 
-      const url = settings.db.url + '/' + settings.db.orders;
+      //const url = settings.db.url + '/' + settings.db.orders;
 
       const payload = {};
       payload.products = [];
