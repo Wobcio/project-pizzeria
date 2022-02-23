@@ -511,10 +511,10 @@
       //const url = settings.db.url + '/' + settings.db.orders;
 
       const payload = {};
-      payload.products = [];
 
-      payload.products.push(thisCart.getData());
-      
+      for(let prod of thisCart.products) {
+        payload.products.push(prod.getData());
+      }
 
       payload.address = thisCart.dom.address.value;
       payload.phone = thisCart.dom.phone.value;
@@ -524,26 +524,6 @@
       payload.deliveryFee = thisCart.deliveryFee;
 
       console.log('payload: ', payload);
-    }
-    getData(){
-      const thisCart = this;
-
-      const productsData = [];
-
-      for (let prod of thisCart.products){
-        const product = {};
-
-        product.id = prod.id;
-        product.amount = prod.amount;
-        product.price = prod.price;
-        product.priceSingle = prod.priceSingle;
-        product.name = prod.name;
-        product.params = prod.params;
-
-        productsData.push(product);
-      }
-      //console.log('productsData: ', productsData);
-      return productsData;
     }
   }
 
