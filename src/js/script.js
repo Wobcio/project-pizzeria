@@ -352,6 +352,7 @@
       if (newValue !== thisWidget.value && newValue != null && newValue >= settings.amountWidget.defaultMin && newValue <= settings.amountWidget.defaultMax){
         thisWidget.value = newValue;
         //console.log('thisWidget.value: ', thisWidget.value);
+        
       }
       
       thisWidget.input.value = thisWidget.value;
@@ -461,7 +462,6 @@
       thisCart.totalPrice = 0;
 
       for (const product of thisCart.products){
-        product.amount = parseInt(product.amount);
         //console.log('product.amount: ', product.amount);
         thisCart.totalNumber += product.amount;
         thisCart.subtotalPrice += product.price;
@@ -508,9 +508,10 @@
     sendOrder(){
       const thisCart = this;
 
-      //const url = settings.db.url + '/' + settings.db.orders;
+      const url = settings.db.url + '/' + settings.db.orders;
 
       const payload = {};
+      payload.products = [];
 
       for(let prod of thisCart.products) {
         payload.products.push(prod.getData());
@@ -524,6 +525,21 @@
       payload.deliveryFee = thisCart.deliveryFee;
 
       console.log('payload: ', payload);
+
+      const options = {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(payload),
+      };
+
+      fetch(url, options)
+        .then(function(response){
+          return response.json();
+        }).then(function(parsedResponse){
+          console.log('pasredResponse: ', parsedResponse);
+        });
     }
   }
 
@@ -564,7 +580,7 @@
       thisCartProduct.amountWidget.input.value = thisCartProduct.amount;
 
       thisCartProduct.dom.amountWidget.addEventListener('updated', function(){
-        thisCartProduct.amount = thisCartProduct.amountWidget.input.value;
+        thisCartProduct.amount = parseInt(thisCartProduct.amountWidget.input.value);
         thisCartProduct.price = thisCartProduct.priceSingle * thisCartProduct.amount;
         thisCartProduct.dom.price.innerHTML = thisCartProduct.price;
       });
