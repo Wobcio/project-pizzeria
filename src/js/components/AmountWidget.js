@@ -26,7 +26,7 @@ class AmountWidget{
 
     const newValue = parseInt(value);
 
-    console.log('newValue: ', newValue);
+    //console.log('newValue: ', newValue);
 
     /* TODO: Add validation */
     if (newValue !== thisWidget.value && newValue != null && newValue >= settings.amountWidget.defaultMin && newValue <= settings.amountWidget.defaultMax){

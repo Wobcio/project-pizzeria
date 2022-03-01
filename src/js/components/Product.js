@@ -5,7 +5,7 @@ import AmountWidget from './AmountWidget.js';
 class Product{
   constructor(id, data){
     const thisProduct = this;
-    console.log('thisProduct: ', thisProduct);
+    //console.log('thisProduct: ', thisProduct);
 
     thisProduct.id = id;
     thisProduct.data = data;
@@ -21,12 +21,14 @@ class Product{
 
     // generate HTML based on template
     const generatedHTML = templates.menuProduct(thisProduct.data);
+    //console.log(generatedHTML);
 
     // create element using utils.createElementFromHTML
     thisProduct.element = utils.createDOMFromHTML(generatedHTML);
       
     // find menu container
     const menuContainer = document.querySelector(select.containerOf.menu);
+    //console.log(menuContainer);
       
     // add element to menu
     menuContainer.appendChild(thisProduct.element);
@@ -66,7 +68,7 @@ class Product{
     });
   }
   initOrderForm(){
-    console.log('initOrderForm');
+    //console.log('initOrderForm');
     const thisProduct = this;
     thisProduct.processOrder();
     thisProduct.form.addEventListener('submit', function(event){
@@ -87,7 +89,7 @@ class Product{
     });
   }
   processOrder(){
-    console.log('processOrder');
+    //console.log('processOrder');
     const thisProduct = this;
     const formData = utils.serializeFormToObject(thisProduct.form);
     //console.log(thisProduct.data);
