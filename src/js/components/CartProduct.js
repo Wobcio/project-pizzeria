@@ -35,10 +35,10 @@ class CartProduct{
     const thisCartProduct = this;
 
     thisCartProduct.amountWidget = new AmountWidget(thisCartProduct.dom.amountWidget);
-    thisCartProduct.amountWidget.input.value = thisCartProduct.amount;
+    thisCartProduct.amountWidget.dom.input.value = thisCartProduct.amount;
 
     thisCartProduct.dom.amountWidget.addEventListener('updated', function(){
-      thisCartProduct.amount = parseInt(thisCartProduct.amountWidget.input.value);
+      thisCartProduct.amount = parseInt(thisCartProduct.amountWidget.dom.input.value);
       thisCartProduct.price = thisCartProduct.priceSingle * thisCartProduct.amount;
       thisCartProduct.dom.price.innerHTML = thisCartProduct.price;
     });
