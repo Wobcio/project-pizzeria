@@ -207,8 +207,8 @@
     "events": [
       {
         "id": 1,
-        "date": "2021-01-01",
-        "hour": "12:30",
+        "date": "2022-03-03",
+        "hour": "16:00",
         "table": 1,
         "repeat": false,
         "duration": 4,
@@ -217,7 +217,17 @@
       },
       {
         "id": 2,
-        "date": "2021-01-01",
+        "date": "2022-03-04",
+        "hour": "16:00",
+        "table": 2,
+        "repeat": "daily",
+        "duration": 2,
+        "ppl": 3,
+        "starters": ["bread", "lemonWater"]
+      },
+      {
+        "id": 3,
+        "date": "",
         "hour": "16:00",
         "table": 3,
         "repeat": "daily",
@@ -226,19 +236,9 @@
         "starters": ["bread", "lemonWater"]
       },
       {
-        "id": 3,
-        "date": "2021-01-01",
-        "hour": "12:00",
-        "table": 3,
-        "repeat": "daily",
-        "duration": 2,
-        "ppl": 3,
-        "starters": ["bread", "lemonWater"]
-      },
-      {
         "id": 4,
-        "date": "2021-01-01",
-        "hour": "13:00",
+        "date": "",
+        "hour": "12:00",
         "table": 2,
         "repeat": "daily",
         "duration": 4,
@@ -247,7 +247,7 @@
       },
       {
         "id": 5,
-        "date": "2021-01-01",
+        "date": "",
         "hour": "18:00",
         "table": 2,
         "repeat": "daily",
@@ -256,5 +256,15 @@
         "starters": ["lemonWater"]
       }
     ],
-    "bookings": []
+    "bookings": [
+       {
+          "id": 1,
+          "date": "2022-03-03",
+          "hour": "19:00",
+          "table": 1,
+          "duration": 3,
+          "ppl": 4,
+          "starters": ["water"]
+       }
+    ]
  }
