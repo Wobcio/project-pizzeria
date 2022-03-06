@@ -2,6 +2,7 @@ import {settings, select, classNames, templates} from './settings.js';
 import Product from './components/Product.js';
 import Cart from './components/Cart.js';
 import Booking from './components/Booking.js';
+import Home from './components/Home.js';
 
 const app = {
   initPages: function(){
@@ -40,6 +41,8 @@ const app = {
   activatePage: function(pageId){
     const thisApp = this;
 
+    ///console.log('activatePage');
+
     // add class active to matching pages, remove from non-matching
     for(let page of thisApp.pages){
       page.classList.toggle(classNames.pages.active, page.id == pageId);
@@ -61,6 +64,14 @@ const app = {
     const bookingContainer = document.querySelector(select.containerOf.booking);
 
     thisApp.bookingWidget = new Booking(bookingContainer);
+  },
+
+  initHome: function(){
+    const thisApp = this;
+
+    const homeContainer = document.querySelector(select.containerOf.home);
+
+    thisApp.home = new Home(homeContainer);
   },
 
   initMenu: function(){
@@ -111,6 +122,26 @@ const app = {
     });
   },
 
+  initLinks: function(){
+    const thisApp = this;
+
+    thisApp.links = document.querySelectorAll(select.all.links);
+
+    for (let link of thisApp.links){
+      link.addEventListener('click', function(event){
+        const clickedElement = this;
+        console.log(clickedElement, 'clicked');
+        event.preventDefault();
+
+        const id = clickedElement.getAttribute('href').replace('#', '');
+      
+        thisApp.activatePage(id);
+
+        window.location.hash = '#/' + id;
+      });
+    }
+  },
+
   init: function(){
     const thisApp = this;
     console.log('*** App starting ***');
@@ -123,6 +154,8 @@ const app = {
     thisApp.initData();
     thisApp.initCart();
     thisApp.initBooking();
+    thisApp.initHome();
+    thisApp.initLinks();
   },
 };
 

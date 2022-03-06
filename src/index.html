@@ -6,8 +6,9 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Pizzeria</title>
   <link href="https://fonts.googleapis.com/css?family=Lato:400,300i,700%7COswald:300,500,700&amp;subset=latin-ext" rel="stylesheet">
-  <link href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+  <link rel="stylesheet" href="https://unpkg.com/flickity@2/dist/flickity.min.css">
   <link rel="stylesheet" href="vendor/range-slider.min.css">
   <link rel="stylesheet" href="css/style.css">
 </head>
@@ -21,6 +22,7 @@
           <h2 class="logo__subtitle">the best homemade Italian food</h2>
         </div>
         <div class="main-nav">
+          <a href="#home">Home</a>
           <a href="#order">Order</a>
           <a href="#booking">Booking</a>
       </div>
@@ -62,6 +64,9 @@
   </header>
 
   <div id="pages">
+    <section id="home">
+      <div class="home-wrapper container"></div>
+    </section>
     <section id="order">
       <div id="product-list" class="product-list container"></div>
     </section>
@@ -69,6 +74,119 @@
       <div class="booking-wrapper container"></div>
     </section>
   </div>
+
+  <script id="template-home" type="text/x-handlebars-template">
+
+    <div class="info">
+      <div class="up">
+        <div class="left">
+          <a href="#order" class="button link">
+            <div class="moveup">
+              ORDER ONLINE
+              <div class="extra">Delicious food delivered to your door</div>
+            </div>
+          </a>
+        </div>
+        <div class="right">
+          <a href="#booking" class="button link">
+            <div class="moveup">
+              BOOK A TABLE
+              <div class="extra">And see how we make your food</div>
+            </div>
+          </a>
+        </div>
+      </div>
+      <div class="down">
+        <h1>OPENING HOURS:</h1>
+        <p>TUE-SUN,12PM-12AM</p>
+      </div>
+    </div>
+
+    <div class="carousel">
+      <div class="main-carousel">
+        <div class="carousel-cell">
+          <div class="img-wrapper">
+            <img src="./images/home/pizza-3.jpg">
+          </div>
+          <div class="text-wrapper">
+            <h3>AMAZING SERVICE!</h3>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam egestas viverra tortor, eu ullamcorper dui imperdiet nec. Nunc sed dolor at elit lobortis sodales.</p>
+            <p>- Margaret Osborne</p>
+          </div>
+        </div>
+        <div class="carousel-cell">
+          <div class="img-wrapper">
+            <img src="./images/home/pizza-4.jpg">
+          </div>
+          <div class="text-wrapper">
+            <h3>AMAZING SERVICE!</h3>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam egestas viverra tortor, eu ullamcorper dui imperdiet nec. Nunc sed dolor at elit lobortis sodales.</p>
+            <p>- Margaret Osborne</p>
+          </div>
+        </div>
+        <div class="carousel-cell">
+          <div class="img-wrapper">
+            <img src="./images/home/pizza-5.jpg">
+          </div>
+          <div class="text-wrapper">
+            <h3>AMAZING SERVICE!</h3>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam egestas viverra tortor, eu ullamcorper dui imperdiet nec. Nunc sed dolor at elit lobortis sodales.</p>
+            <p>- Margaret Osborne</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="galery">
+      <div class="row">
+        <div class="image-wrapper">
+          <img src="./images/home/pizza-6.jpg">
+          <div class="overlay">
+            <i class="fa-solid fa-heart"></i>
+            <i class="fa-solid fa-share-nodes"></i>
+          </div>
+        </div>
+        <div class="image-wrapper">
+          <img src="./images/home/pizza-7.jpg">
+          <div class="overlay">
+            <i class="fa-solid fa-heart"></i>
+            <i class="fa-solid fa-share-nodes"></i>
+          </div>
+        </div>
+        <div class="image-wrapper">
+          <img src="./images/home/pizza-8.jpg">
+          <div class="overlay">
+            <i class="fa-solid fa-heart"></i>
+            <i class="fa-solid fa-share-nodes"></i>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="image-wrapper">
+          <img src="./images/home/pizza-1.jpg">
+          <div class="overlay">
+            <i class="fa-solid fa-heart"></i>
+            <i class="fa-solid fa-share-nodes"></i>
+          </div>
+        </div>
+        <div class="image-wrapper">
+          <img src="./images/home/pizza-2.jpg">
+          <div class="overlay">
+            <i class="fa-solid fa-heart"></i>
+            <i class="fa-solid fa-share-nodes"></i>
+          </div>
+        </div>
+        <div class="image-wrapper">
+          <img src="./images/home/pizza-3.jpg">
+          <div class="overlay">
+            <i class="fa-solid fa-heart"></i>
+            <i class="fa-solid fa-share-nodes"></i>
+          </div>
+        </div>
+      </div>
+      <a href="#">View more on instagram</a>
+    </div>
+  </script>
 
   <script id="template-cart-product" type="text/x-handlebars-template">
     <li>
@@ -245,7 +363,8 @@
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.1.0/handlebars.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
-  <script src="vendor/range-slider.min.js"></script>
+  <script src="./vendor/range-slider.min.js"></script>
+  <script src="https://unpkg.com/flickity@2/dist/flickity.pkgd.min.js"></script>
   <script src="js/app.js" type="module"></script>
 
 </body>
